@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import time
 
+
 class BetfairParser:
     def __init__(self):
         self.page = 'https://www.betfair.com/exchange/plus/ru/%D1%84%D1%83%D1%82%D0%B1%D0%BE%D0%BB-%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-1'
@@ -34,7 +35,7 @@ class BetfairParser:
                 item.click()
                 break
         li_name = []
-        while len(li_name) < 3:
+        while len(li_name) != 100:
             print('[INFO] Ожидаем полную загрузку страницы')
             content = self.browser.page_source
             soup = BS(content, 'html.parser')
@@ -48,8 +49,9 @@ class BetfairParser:
                 table_online_game = table
                 break
         if table_online_game:
-            time.sleep(1)
-            table_online_game.select('.mod-event-line.ng-scope.ng-isolate-scope.large')
+            games = table_online_game.select('.mod-event-line.ng-scope.ng-isolate-scope.large')
+        else:
+            print('[INFO] Игры онлайн не найдены')
 
 parser = BetfairParser()
 parser.get_online_game()

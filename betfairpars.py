@@ -87,7 +87,7 @@ class BetfairParser:
                         live_stream_href = live_stream_popup[0]['href']
                     except KeyError:
                         live_stream_href = None
-            print(self.main_page+'pop-out-live-stream/'+live_stream_popup[0]['href'])
+            print(self.main_page+live_stream_popup[0]['href'])
             #live_stream_page = live_stream_popup[0]['href']
 
 
